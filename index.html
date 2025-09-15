@@ -45,6 +45,12 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script type="module">
     function createUniversalLink() {
+      const link1 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink1").append(link1)
+
+      liff.permanentLink.setExtraQueryParam('param=9')
+      const link2 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink2").append(link2)
     }
 
     async function shareMsg() {
@@ -126,14 +132,14 @@
     }
 
     async function main() {
-      await liff.init({ liffId: "2008086586-AElNnQjQ" })
+      await liff.init({ liffId: "2008109706-Mdomqx1E" })
       document.getElementById("isLoggedIn").append(liff.isLoggedIn())
       if(liff.isLoggedIn()){
           getEnvironment()
           getUserProfile()
           getContext()
           // getFriendship()
-          // createUniversalLink()
+          createUniversalLink()
       } else {
         liff.login()
       }
