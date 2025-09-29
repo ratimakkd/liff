@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "id": "evt_bkk_001",
+      "title": "ART ISLAND FESTIVAL",
+      "datetime": "2025-09-26T16:00:00+07:00",
+      "venue": "499/1 Thanon Rama III",
+      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1105182663%2F714081845133%2F1%2Foriginal.20250826-085146?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C60%2C1920%2C960&s=2f6f5c783b0623f94e3b1d4ae63625ac",
+      "url": "https://example.com/tickets/art-island",
+      "price": "Free",
+      "tagline": "3 days of art, music & food!"
+    },
+    {
+      "id": "evt_bkk_002",
+      "title": "City Music Live",
+      "datetime": "2025-10-04T20:00:00+07:00",
+      "venue": "Asiatique",
+      "image": "https://picsum.photos/800/400?2",
+      "url": "https://example.com/tickets/music-live",
+      "price": "฿890",
+      "tagline": "Live bands by the river"
+    },
+    {
+      "id": "evt_bkk_003",
+      "title": "Book Fair Bangkok",
+      "datetime": "2025-10-12T10:00:00+07:00",
+      "venue": "QSNCC",
+      "image": "https://picsum.photos/800/400?3",
+      "url": "https://example.com/tickets/book-fair",
+      "price": "Free",
+      "tagline": "Find your next favorite read"
+    }
+  ]
+}
