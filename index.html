@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-  <title>My LIFF app</title>
+  <title>Eventure BKK</title>
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
@@ -72,21 +72,6 @@
         </div>
       </div>
     </div>
-
-        async function main() {
-      await liff.init({ liffId: "2008109706-Mdomqx1E" })
-      document.getElementById("isLoggedIn").append(liff.isLoggedIn())
-      if(liff.isLoggedIn()){
-          getEnvironment()
-          getUserProfile()
-          getContext()
-          // getFriendship()
-          createUniversalLink()
-      } else {
-        liff.login()
-      }
-    }
-    main()
 
     <script type="module" src="./index.js?v=1"></script>
   </body>

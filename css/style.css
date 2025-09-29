@@ -1,5 +1,5 @@
 :root {
-  --bg:#fff; --fg:#111; --muted:#666; --brand:#c82424;
+  --bg:#fff; --fg:#111; --muted:#666; --brand:#D97D55;
   --accent:#a6d6d6; --accent2:#f79b72; --border:#eee; --radius:16px;
 }
 *{box-sizing:border-box}
@@ -61,3 +61,5 @@ img{display:block;max-width:100%}
 .btn{border:1px solid #eee;background:#fff;border-radius:10px;padding:10px 14px}
 .btn.primary{background:#a6d6d6;border-color:#a6d6d6}
 .muted{color:#666}
+/* ให้การ์ดใน Recommend กว้างพอสำหรับแนวนอน */
+.hlist .card { min-width: 220px; flex: 0 0 auto; }
