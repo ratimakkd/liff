@@ -7,131 +7,73 @@
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-  <p id="os"><b>OS:</b> </p>
-  <p id="language"><b>Language:</b> </p>
-  <p id="version"><b>Version:</b> </p>
-  <p id="isInClient"><b>isInClient:</b> </p>
-  <p id="accessToken"><b>AccessToken:</b> </p>
-  <img id="pictureUrl">
-  <p id="userId"><b>userId:</b> </p>
-  <p id="displayName"><b>displayName:</b> </p>
-  <p id="statusMessage"><b>statusMessage:</b> </p>
-  <p id="decodedIDToken"><b>email:</b> </p>
-  <p id="type"><b>type:</b> </p>
-  <p id="viewType"><b>viewType:</b> </p>
-  <p id="utouId"><b>utouId:</b> </p>
-  <p id="roomId"><b>roomId:</b> </p>
-  <p id="groupId"><b>groupId:</b> </p>
-  <p id="friendship"><b>isFriendship:</b> </p>
-  <p id="scanCode"><b>Code:</b> </p>
-  <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
-  <p id="universalLink1"><b>Universal Link:</b> </p>
-  <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
-  <p><a href="liff/path/?param=9">Link to Path</a></p>
+    <!-- App Bar -->
+    <header class="appbar">
+      <div class="brand">Eventure BKK</div>
+      <div class="actions">
+        <button id="btnClose" class="icon-btn" title="Close">✕</button>
+      </div>
+    </header>
 
-  <button id="btnMsg" onclick="sendMsg()">Send Message</button>
-  <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
-  <button onclick="openWindow()">Open Window</button>
-  <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
-  <button id="btnLogOut" onclick="logOut()">Log Out</button>
-  <button id="btnClose" onclick="closed()">Close</button>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Hello</h1>
+        <p>Discover & share Bangkok events</p>
+      </div>
+    </section>
 
-  <!-- <script src="js/vconsole.min.js"></script> -->
-  <!-- <script>
-    var vConsole = new VConsole()
-    console.log("Hello World!")
-  </script> -->
+    <!-- Quick actions -->
+    <nav class="quick">
+      <button class="chip" data-target="home">Home</button>
+      <button class="chip" data-target="events">Events</button>
+    </nav>
 
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script type="module">
-    function createUniversalLink() {
-      const link1 = liff.permanentLink.createUrl()
-      document.getElementById("universalLink1").append(link1)
+    <!-- Home -->
+    <main id="view-home" class="view active">
+      <section class="section-head">
+        <h2>Recommend</h2>
+        <a href="#events" class="more" id="goEvents">More</a>
+      </section>
+      <section id="home-reco" class="hlist"></section>
+    </main>
 
-      liff.permanentLink.setExtraQueryParam('param=9')
-      const link2 = liff.permanentLink.createUrl()
-      document.getElementById("universalLink2").append(link2)
-    }
+    <!-- Events -->
+    <main id="view-events" class="view">
+      <section class="section-head">
+        <h2>Events</h2>
+      </section>
+      <section id="eventGrid" class="grid"></section>
+    </main>
 
-    async function shareMsg() {
-      await liff.shareTarhetPicker([
-        {
-          "type": "text",
-          "type": "This message was sent by ShareTargetPicker"
-        }
-      ])
-    }
+    <!-- Bottom tab -->
+    <nav class="tabbar">
+      <button class="tab active" data-target="home">🏠</button>
+      <button class="tab" data-target="events">📍</button>
+    </nav>
 
-    function logOut() {
-      liff.logOut()
-      window.location.reload()
-    }
+    <p id="status" class="status">Loading…</p>
 
-    function closed() {
-      liff.closeWindow()
-    }
+    <!-- Event Detail Sheet -->
+    <div id="detailSheet" class="sheet">
+      <div class="sheet__inner">
+        <button id="sheetClose" class="sheet__close">×</button>
+        <img id="dImg" class="sheet__img" src="" alt="" />
+        <h3 id="dTitle"></h3>
+        <p id="dSub" class="muted"></p>
+        <ul class="kv">
+          <li><b>Place</b> <span id="dPlace"></span></li>
+          <li><b>Date & Time</b> <span id="dDate"></span></li>
+          <li><b>Price</b> <span id="dPrice"></span></li>
+        </ul>
+        <div class="btnrow">
+          <a id="dTicket" class="btn primary" target="_blank" rel="noopener">Get tickets</a>
+          <button id="dShare" class="btn">Share</button>
+        </div>
+      </div>
+    </div>
 
-    async function scanCode() {
-      const result = await liff.scanCode()
-      document.getElementById("scanCode").append(result.value)
-    }
-
-    function openWindow() {
-      liff.openWindow({
-        url: "https://line.me",
-        external: true
-      })
-    }
-
-    async function getFriendship() {
-    }
-
-    async function sendMsg() {
-      if (liff.getContext().type !== "none"){
-        await liff.sendMessages([
-          {
-            "type": "sticker",
-            "stickerId": 1,
-            "packageId": 1
-          }
-        ])
-        alert("Message sent")
-      }
-    }
-
-    function getContext() {
-      document.getElementById("type").append(liff.getContext().type)
-      document.getElementById("viewType").append(liff.getContext().viewType)
-      document.getElementById("utouId").append(liff.getContext().utouId)
-      document.getElementById("roomId").append(liff.getContext().roomId)
-      document.getElementById("groupId").append(liff.getContext().groupId)
-    }
-
-
-    async function getUserProfile() {
-      const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-      document.getElementById("userId").append(profile.userId)      
-      document.getElementById("statusMessage").append(profile.statusMessage)
-      document.getElementById("displayName").append(profile.displayName)
-    }
-
-    function getEnvironment() {
-      document.getElementById("os").append(liff.getOS())
-      document.getElementById("language").append(liff.getLanguage())
-      document.getElementById("version").append(liff.getVersion())
-      document.getElementById("accessToken").append(liff.getAccessToken())
-      document.getElementById("isInClient").append(liff.isInClient())
-      if(liff.isInClient()){
-        document.getElementById("btnLogOut").style.display = "none"
-      } else{
-        document.getElementById("btnMsg").style.display = "none"
-        document.getElementById("btnScanCode"). style.display = "none"
-        document.getElementById("btnClose"). style.display = "none"
-      }
-    }
-
-    async function main() {
+        async function main() {
       await liff.init({ liffId: "2008109706-Mdomqx1E" })
       document.getElementById("isLoggedIn").append(liff.isLoggedIn())
       if(liff.isLoggedIn()){
@@ -145,6 +87,7 @@
       }
     }
     main()
-  </script>
-</body>
+
+    <script type="module" src="./index.js?v=1"></script>
+  </body>
 </html>
