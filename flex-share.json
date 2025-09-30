@@ -1,155 +1,177 @@
 {
   "type": "flex",
-  "altText": "Flex Message",
+  "altText": "Bangkok Events: ART ISLAND FESTIVAL & Pawty day",
   "contents": {
-    "type": "bubble",
-    "hero": {
-      "type": "image",
-      "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1100466453%2F714081845133%2F1%2Foriginal.20250820-103412?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ea13474579b376ee5341447ef4bd813e",
-      "size": "full",
-      "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "uri": "https://line.me/"
-      }
-    },
-    "body": {
-      "type": "box",
-      "layout": "vertical",
-      "contents": [
-        {
-          "type": "text",
-          "text": "Pawty day",
-          "weight": "bold",
-          "size": "xl"
+    "type": "carousel",
+    "contents": [
+      {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1105182663%2F714081845133%2F1%2Foriginal.20250826-085146?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C60%2C1920%2C960&s=2f6f5c783b0623f94e3b1d4ae63625ac",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": { "type": "uri", "uri": "https://line.me/" }
         },
-        {
+        "body": {
           "type": "box",
-          "layout": "baseline",
-          "margin": "md",
+          "layout": "vertical",
           "contents": [
+            { "type": "text", "text": "ART ISLAND FESTIVAL", "weight": "bold", "size": "xl" },
             {
-              "type": "text",
-              "text": "Dogs, food, music & more! ",
-              "size": "sm",
-              "color": "#A6D6D6",
+              "type": "box",
+              "layout": "baseline",
               "margin": "md",
-              "flex": 0
+              "contents": [
+                { "type": "text", "text": "3 days of art, music & food !", "size": "sm", "color": "#A6D6D6", "margin": "md", "flex": 0 }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "margin": "lg",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Place", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "499/1 Thanon Rama III", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Date & Time", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "Friday, September 26 · 4 - 9pm GMT+7", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Price", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "Free", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
+                }
+              ]
             }
           ]
         },
-        {
+        "footer": {
           "type": "box",
           "layout": "vertical",
-          "margin": "lg",
           "spacing": "sm",
+          "flex": 0,
           "contents": [
             {
+              "type": "button",
+              "style": "primary",
+              "height": "md",
+              "action": { "type": "uri", "label": "Get tickets", "uri": "https://line.me/" },
+              "color": "#A6D6D6"
+            },
+            {
+              "type": "button",
+              "style": "link",
+              "height": "sm",
+              "action": { "type": "uri", "label": "share", "uri": "https://line.me/" },
+              "color": "#F79B72"
+            },
+            { "type": "box", "layout": "vertical", "contents": [], "margin": "sm" }
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1100466453%2F714081845133%2F1%2Foriginal.20250820-103412?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ea13474579b376ee5341447ef4bd813e",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": { "type": "uri", "uri": "https://line.me/" }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            { "type": "text", "text": "Pawty day", "weight": "bold", "size": "xl" },
+            {
               "type": "box",
               "layout": "baseline",
-              "spacing": "sm",
+              "margin": "md",
               "contents": [
-                {
-                  "type": "text",
-                  "text": "Place",
-                  "color": "#aaaaaa",
-                  "size": "sm",
-                  "flex": 1
-                },
-                {
-                  "type": "text",
-                  "text": "499/1 Thanon Rama III",
-                  "wrap": true,
-                  "color": "#666666",
-                  "size": "sm",
-                  "flex": 5
-                }
+                { "type": "text", "text": "Dogs, food, music & more! ", "size": "sm", "color": "#9ECAD6", "margin": "md", "flex": 0 }
               ]
             },
             {
               "type": "box",
-              "layout": "baseline",
+              "layout": "vertical",
+              "margin": "lg",
               "spacing": "sm",
               "contents": [
                 {
-                  "type": "text",
-                  "text": "Date & Time",
-                  "color": "#aaaaaa",
-                  "size": "sm",
-                  "flex": 1
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Place", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "499/1 Thanon Rama III", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "text": "Sunday, October 5 · 4 - 9pm GMT+7",
-                  "wrap": true,
-                  "color": "#666666",
-                  "size": "sm",
-                  "flex": 5
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "baseline",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "Price",
-                  "color": "#aaaaaa",
-                  "size": "sm",
-                  "flex": 1
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Date & Time", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "Sunday, October 5 · 4 - 9pm GMT+7", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "text": "Free",
-                  "wrap": true,
-                  "color": "#666666",
-                  "size": "sm",
-                  "flex": 5
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    { "type": "text", "text": "Price", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                    { "type": "text", "text": "Free", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    "footer": {
-      "type": "box",
-      "layout": "vertical",
-      "spacing": "sm",
-      "contents": [
-        {
-          "type": "button",
-          "style": "primary",
-          "height": "md",
-          "action": {
-            "type": "uri",
-            "label": "Get tickets",
-            "uri": "https://line.me/"
-          },
-          "color": "#1679AB"
         },
-        {
-          "type": "button",
-          "style": "link",
-          "height": "sm",
-          "action": {
-            "type": "uri",
-            "label": "share",
-            "uri": "https://line.me/"
-          },
-          "color": "#FFB1B1"
-        },
-        {
+        "footer": {
           "type": "box",
           "layout": "vertical",
-          "contents": [],
-          "margin": "sm"
+          "spacing": "sm",
+          "flex": 0,
+          "contents": [
+            {
+              "type": "button",
+              "style": "primary",
+              "height": "md",
+              "action": { "type": "uri", "label": "Get tickets", "uri": "https://line.me/" },
+              "color": "#1679AB"
+            },
+            {
+              "type": "button",
+              "style": "link",
+              "height": "sm",
+              "action": { "type": "uri", "label": "share", "uri": "https://line.me/" },
+              "color": "#FFB1B1"
+            },
+            { "type": "box", "layout": "vertical", "contents": [], "margin": "sm" }
+          ]
         }
-      ],
-      "flex": 0
-    }
+      }
+    ]
   }
 }
