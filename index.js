@@ -1,9 +1,5 @@
-/***********************
- * LIFF
- ***********************/
 const LIFF_ID = '2008172947-YN7apd90';
 
-/* ---------- DOM ---------- */
 const $ = (id) => document.getElementById(id);
 const homeReco = $('home-reco');
 const grid     = $('eventGrid');
@@ -26,7 +22,6 @@ const goEvents   = $('goEvents');
 const isLineUA = /Line/i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent);
 const setStatus = (t) => { if (statusEl) statusEl.textContent = t || ''; };
 
-/* ---------- Helpers ---------- */
 function fmtDate(dtStr) {
   try { return new Date(dtStr).toLocaleString('en-TH', { dateStyle: 'medium', timeStyle: 'short' }); }
   catch { return dtStr || '-'; }
@@ -51,7 +46,7 @@ function toBubble(ev) {
       size: 'full',
       aspectRatio: '20:13',
       aspectMode: 'cover',
-      action: { type: 'uri', uri: ev.url || 'https://line.me/' },
+      action: { type: 'uri', uri: ev.url },
     },
     body: {
       type: 'box',
@@ -180,16 +175,15 @@ function findFooterUrl(bubble) {
   return found;
 }
 
-/* ---------- Renderers ---------- */
 const card = (ev) => `
   <article class="card open-detail" data-id="${ev.id}">
-    <img src="${ev.image}" alt="">
+    <div class="thumb"><img src="${ev.image}" alt=""></div>
     <div class="meta">
-      <div class="title">${ev.title || ''}</div>
-      <div class="sub">${[fmtDate(ev.datetime), ev.venue].filter(Boolean).join(' · ')}</div>
+      <div class="title">${ev.title}</div>
+      <div class="sub">${fmtDate(ev.datetime)} · ${ev.venue}</div>
     </div>
-  </article>
-`;
+  </article>`;
+
 
 function renderRecommend(events) {
   homeReco.innerHTML = events.slice(0, 4).map(card).join('') || '<div class="empty">No events.</div>';
@@ -208,7 +202,7 @@ function openDetail(ev) {
   dPlace.textContent = ev.venue || '-';
   dDate.textContent = fmtDate(ev.datetime);
   dPrice.textContent = ev.price || '-';
-  dTicket.href = ev.url || 'https://line.me/';
+  dTicket.href = ev.url;
   sheet.classList.add('open');
 }
 function closeDetail() { sheet.classList.remove('open'); currentEvent = null; }
@@ -273,7 +267,6 @@ btnClose?.addEventListener('click', () => {
   } catch (err) {
     console.error(err);
     setStatus('Failed to load events from flex-share.json');
-    // ไม่ใช้ fallback ตามที่ขอ: ปล่อยให้ว่าง + โชว์สถานะ
   }
 
   goto('home');

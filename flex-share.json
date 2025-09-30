@@ -12,7 +12,7 @@
           "size": "full",
           "aspectRatio": "20:13",
           "aspectMode": "cover",
-          "action": { "type": "uri", "uri": "https://line.me/" }
+          "action": { "type": "uri", "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld=1" }
         },
         "body": {
           "type": "box",
@@ -48,7 +48,7 @@
                   "spacing": "sm",
                   "contents": [
                     { "type": "text", "text": "Date & Time", "color": "#aaaaaa", "size": "sm", "flex": 1 },
-                    { "type": "text", "text": "Friday, September 26 · 4 - 9pm GMT+7", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                    { "type": "text", "text": "2025-09-26T16:00:00+07:00", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
                   ]
                 },
                 {
@@ -96,7 +96,7 @@
           "size": "full",
           "aspectRatio": "20:13",
           "aspectMode": "cover",
-          "action": { "type": "uri", "uri": "https://line.me/" }
+          "action": { "type": "uri", "uri": "https://www.eventbrite.com/e/pawty-day-tickets-1610058280659?aff=ebdssbcitybrowse&keep_tld=1" }
         },
         "body": {
           "type": "box",
@@ -132,7 +132,7 @@
                   "spacing": "sm",
                   "contents": [
                     { "type": "text", "text": "Date & Time", "color": "#aaaaaa", "size": "sm", "flex": 1 },
-                    { "type": "text", "text": "Sunday, October 5 · 4 - 9pm GMT+7", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                    { "type": "text", "text": "2025-10-05T15:00:00+07:00", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
                   ]
                 },
                 {
@@ -171,7 +171,297 @@
             { "type": "box", "layout": "vertical", "contents": [], "margin": "sm" }
           ]
         }
+      },
+      {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1069695303%2F517592609529%2F1%2Foriginal.20250709-091116?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ca92d2278df9b948c738e1076864579e",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld="
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "MeetToMatch - The Bangkok Edition",
+              "weight": "bold",
+              "size": "xl"
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "margin": "md",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Meet all relevant publishers, investors, and developers during the biggest games industry gathering in Bangkok, or from home.",
+                  "size": "sm",
+                  "color": "#C75A57",
+                  "margin": "md",
+                  "flex": 0
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "margin": "lg",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "Place",
+                      "color": "#aaaaaa",
+                      "size": "sm",
+                      "flex": 1
+                    },
+                    {
+                      "type": "text",
+                      "text": "Queen Sirikit National Convention Center",
+                      "wrap": true,
+                      "color": "#666666",
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "Date & Time",
+                      "color": "#aaaaaa",
+                      "size": "sm",
+                      "flex": 1
+                    },
+                    {
+                      "type": "text",
+                      "text": "2025-10-17T09:00:00+07:00",
+                      "wrap": true,
+                      "color": "#666666",
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "Price",
+                      "color": "#aaaaaa",
+                      "size": "sm",
+                      "flex": 1
+                    },
+                    {
+                      "type": "text",
+                      "text": "490฿",
+                      "wrap": true,
+                      "color": "#666666",
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "button",
+              "style": "primary",
+              "height": "md",
+              "action": {
+                "type": "uri",
+                "label": "Get tickets",
+                "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld=1"
+              },
+              "color": "#C7578B"
+            },
+            {
+              "type": "button",
+              "style": "link",
+              "height": "sm",
+              "action": {
+                "type": "uri",
+                "label": "share",
+                "uri": "https://line.me/"
+              },
+              "color": "#C79357"
+            }
+          ],
+          "flex": 0
+        }
+    },
+    {
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://p-u.popcdn.net/event_details/posters/000/113/210/large/0dfd5b2b2ce5acfce6fb2a36e2ef5df6be6881df.jpg?1758622998",
+      "size": "full",
+      "aspectRatio": "20:13",
+      "aspectMode": "cover",
+      "action": {
+        "type": "uri",
+        "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld=1"
       }
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Bangkok Illustration Fair 2025",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "baseline",
+          "margin": "md",
+          "contents": [
+            {
+              "type": "text",
+              "text": "Bangkok Illustration Fair (BKKIF)",
+              "size": "sm",
+              "color": "#C75A57",
+              "margin": "md",
+              "flex": 0
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "lg",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Place",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 1
+                },
+                {
+                  "type": "text",
+                  "text": "centralwOrld PULSE, 7th Floor of centralwOrld ",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Date & Time",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 1
+                },
+                {
+                  "type": "text",
+                  "text": "2025-09-28T17:00:00+07:00",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Price",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 1
+                },
+                {
+                  "type": "text",
+                  "text": "Free",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "primary",
+          "height": "md",
+          "action": {
+            "type": "uri",
+            "label": "Get tickets",
+            "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld=1"
+          },
+          "color": "#3DE1DE"
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "uri",
+            "label": "share",
+            "uri": "https://line.me/"
+          },
+          "color": "#C79357"
+        }
+      ],
+      "flex": 0
+    }
+  }
     ]
   }
 }
