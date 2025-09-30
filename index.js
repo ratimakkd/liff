@@ -1,12 +1,13 @@
 /***********************
- *  LIFF (แก้เป็นของคุณได้)
+ * LIFF
  ***********************/
 const LIFF_ID = '2008172947-YN7apd90';
 
 /* ---------- DOM ---------- */
 const $ = (id) => document.getElementById(id);
-const homeReco   = $('home-reco');
-const grid       = $('eventGrid');
+const homeReco = $('home-reco');
+const grid     = $('eventGrid');
+const statusEl = $('status');
 
 const sheet      = $('detailSheet');
 const sheetClose = $('sheetClose');
@@ -23,36 +24,14 @@ const btnClose   = $('btnClose');
 const goEvents   = $('goEvents');
 
 const isLineUA = /Line/i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent);
-
-/* ---------- Fallback: แสดงทันที ---------- */
-const FALLBACK_EVENTS = [
-  {
-    id: 'demo_1',
-    title: 'ART ISLAND FESTIVAL',
-    datetime: '2025-09-26T16:00:00+07:00',
-    venue: 'Rama III',
-    image: 'https://picsum.photos/800/400?1',
-    url: 'https://example.com/tickets/art-island',
-    price: 'Free',
-    tagline: '3 days of art, music & food!',
-  },
-  {
-    id: 'demo_2',
-    title: 'City Music Live',
-    datetime: '2025-10-04T20:00:00+07:00',
-    venue: 'Asiatique',
-    image: 'https://picsum.photos/800/400?2',
-    url: 'https://example.com/tickets/music-live',
-    price: '฿890',
-    tagline: 'Live bands by the river',
-  },
-];
+const setStatus = (t) => { if (statusEl) statusEl.textContent = t || ''; };
 
 /* ---------- Helpers ---------- */
 function fmtDate(dtStr) {
   try { return new Date(dtStr).toLocaleString('en-TH', { dateStyle: 'medium', timeStyle: 'short' }); }
   catch { return dtStr || '-'; }
 }
+
 function infoRow(label, value) {
   return {
     type: 'box', layout: 'baseline', spacing: 'sm',
@@ -62,6 +41,7 @@ function infoRow(label, value) {
     ],
   };
 }
+
 function toBubble(ev) {
   return {
     type: 'bubble',
@@ -101,19 +81,121 @@ function toBubble(ev) {
 }
 const toFlex = (ev) => ({ type: 'flex', altText: ev.title || 'Bangkok event', contents: toBubble(ev) });
 
+/* ---------- Loader: flex-share.json ---------- */
+/** รองรับ 2 รูปแบบ:
+ * 1) { "events": [ {id,title,datetime,venue,image,url,price,tagline}, ... ] }
+ * 2) Flex object: { type:"flex", contents:{ type:"bubble" | "carousel", ... } }
+ *    จะ extract บับเบิลเป็น event อัตโนมัติ
+ */
+async function loadEvents() {
+  const url = new URL('flex-share.json', document.baseURI).href + `?v=${Date.now()}`;
+  setStatus('Loading events…');
+
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`HTTP ${res.status} loading ${url}`);
+  const data = await res.json();
+
+  const events = normalizeToEvents(data);
+  if (!events.length) throw new Error('No events found in flex-share.json');
+  // เติม id ถ้าไม่มี
+  return events.map((e, i) => ({ id: e.id || `evt_${i}`, ...e }));
+}
+
+/* แปลง flex -> events (ดึง title/image/venue/datetime/price/tagline เท่าที่หาได้) */
+function normalizeToEvents(data) {
+  if (Array.isArray(data?.events)) return data.events;
+
+  // ถ้าเป็น flex object
+  if (data?.type === 'flex' && data?.contents) {
+    const c = data.contents;
+    if (c.type === 'bubble') return [bubbleToEvent(c)];
+    if (c.type === 'carousel' && Array.isArray(c.contents)) {
+      return c.contents.map(bubbleToEvent);
+    }
+  }
+
+  // ถ้าเป็น array ของ event อยู่แล้ว
+  if (Array.isArray(data)) return data;
+
+  return [];
+}
+
+function bubbleToEvent(b) {
+  const image = b?.hero?.url || '';
+  const url   = b?.hero?.action?.uri || findFooterUrl(b) || '';
+  const { title, tagline } = extractTitleTagline(b?.body);
+  const meta = extractMeta(b?.body); // { place, datetime, price }
+
+  return {
+    title: title || 'Untitled',
+    tagline: tagline || '',
+    image, url,
+    venue: meta.place || '',
+    datetime: meta.datetime || '',
+    price: meta.price || '',
+  };
+}
+
+function extractTitleTagline(body) {
+  const out = { title: '', tagline: '' };
+  const contents = (body?.contents || []).filter(Boolean);
+  const textNodes = [];
+  (function walk(nodes){
+    for (const n of nodes) {
+      if (n.type === 'text') textNodes.push(n.text);
+      if (Array.isArray(n.contents)) walk(n.contents);
+    }
+  })(contents);
+  out.title = textNodes[0] || '';
+  out.tagline = textNodes[1] || '';
+  return out;
+}
+
+function extractMeta(body) {
+  const meta = { place: '', datetime: '', price: '' };
+  (function walk(n){
+    if (!n) return;
+    if (n.type === 'box' && n.layout === 'baseline' && Array.isArray(n.contents)) {
+      const texts = n.contents.filter(x => x.type === 'text').map(x => (x.text || '').trim());
+      if (texts.length >= 2) {
+        const [label, value] = texts;
+        if (/^place$/i.test(label)) meta.place = value;
+        else if (/^(date ?& ?time|time|date)$/i.test(label)) meta.datetime = value;
+        else if (/^price$/i.test(label)) meta.price = value;
+      }
+    }
+    if (Array.isArray(n.contents)) n.contents.forEach(walk);
+  })(body);
+  return meta;
+}
+
+function findFooterUrl(bubble) {
+  const ft = bubble?.footer;
+  let found = '';
+  (function walk(n){
+    if (!n) return;
+    if (n.type === 'button' && n.action?.type === 'uri' && n.action?.uri) found = found || n.action.uri;
+    if (Array.isArray(n.contents)) n.contents.forEach(walk);
+  })(ft);
+  return found;
+}
+
 /* ---------- Renderers ---------- */
 const card = (ev) => `
   <article class="card open-detail" data-id="${ev.id}">
     <img src="${ev.image}" alt="">
     <div class="meta">
-      <div class="title">${ev.title}</div>
-      <div class="sub">${fmtDate(ev.datetime)} · ${ev.venue}</div>
+      <div class="title">${ev.title || ''}</div>
+      <div class="sub">${[fmtDate(ev.datetime), ev.venue].filter(Boolean).join(' · ')}</div>
     </div>
   </article>
 `;
-function renderAll(events) {
-  homeReco.innerHTML = events.slice(0, 4).map(card).join('');
-  grid.innerHTML      = events.map(card).join('');
+
+function renderRecommend(events) {
+  homeReco.innerHTML = events.slice(0, 4).map(card).join('') || '<div class="empty">No events.</div>';
+}
+function renderEventsList(events) {
+  grid.innerHTML = events.map(card).join('') || '<div class="empty">No events.</div>';
 }
 
 /* ---------- Detail sheet + Share ---------- */
@@ -130,17 +212,19 @@ function openDetail(ev) {
   sheet.classList.add('open');
 }
 function closeDetail() { sheet.classList.remove('open'); currentEvent = null; }
-
 sheetClose.addEventListener('click', closeDetail);
 sheet.addEventListener('click', (e) => { if (e.target === sheet) closeDetail(); });
 
 dShare.addEventListener('click', async () => {
   if (!currentEvent) return;
   if (!window.liff || !liff.isApiAvailable?.('shareTargetPicker')) {
-    alert('Open inside LINE to share.'); return;
+    alert('Please open inside the LINE app to share.'); return;
   }
-  try { await liff.shareTargetPicker([toFlex(currentEvent)]); }
-  catch (err) { if (err?.code !== 'USER_CANCEL') alert(err?.message || String(err)); }
+  try {
+    await liff.shareTargetPicker([toFlex(currentEvent)]);
+  } catch (err) {
+    if (err?.code !== 'USER_CANCEL') alert(err?.message || String(err));
+  }
 });
 
 /* ---------- เปิดการ์ด → รายละเอียด ---------- */
@@ -164,28 +248,13 @@ document.querySelectorAll('.chip[data-target]').forEach(c => c.addEventListener(
 goEvents?.addEventListener('click', (e) => { e.preventDefault(); goto('events'); });
 
 btnClose?.addEventListener('click', () => {
-  if (window.liff && liff.closeWindow) liff.closeWindow(); else window.close?.();
+  if (window.liff && liff.closeWindow) liff.closeWindow();
+  else window.close?.();
 });
-
-/* ---------- Data: โหลด flex-share.json แบบ background แล้วอัปเดต ---------- */
-async function fetchLatestEvents() {
-  // ใช้ path เดียวกับ index.html
-  const url = new URL('flex-share.json', document.baseURI).href + `?v=${Date.now()}`;
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  if (!Array.isArray(data?.events)) throw new Error('missing "events"');
-  return data.events.map((e, i) => ({ id: e.id || 'evt_' + i, ...e }));
-}
 
 /* ---------- Boot ---------- */
 (async function boot() {
-  // 1) แสดง UI ทันทีจาก fallback
-  window.__EVENTS__ = FALLBACK_EVENTS;
-  renderAll(FALLBACK_EVENTS);
-  goto('home');
-
-  // 2) เปิดใช้ share เมื่ออยู่ใน LINE
+  // เปิดใช้ share ใน LINE (ไม่บังคับให้ login ถ้าเป็น Mini App)
   try {
     if (isLineUA || /miniapp\.line\.me/.test(document.referrer)) {
       await liff.init({ liffId: LIFF_ID });
@@ -195,13 +264,17 @@ async function fetchLatestEvents() {
     console.warn('LIFF init failed (preview mode):', e);
   }
 
-  // 3) โหลดของจริงจาก flex-share.json แล้วอัปเดต UI
   try {
-    const latest = await fetchLatestEvents();
-    window.__EVENTS__ = latest;
-    renderAll(latest);
-  } catch (e) {
-    console.warn('Fetch flex-share.json failed:', e);
-    // โหลดไม่ได้ก็ยังเห็น fallback ใช้งานได้ก่อน
+    const events = await loadEvents();
+    window.__EVENTS__ = events;
+    renderRecommend(events);
+    renderEventsList(events);
+    setStatus('');
+  } catch (err) {
+    console.error(err);
+    setStatus('Failed to load events from flex-share.json');
+    // ไม่ใช้ fallback ตามที่ขอ: ปล่อยให้ว่าง + โชว์สถานะ
   }
+
+  goto('home');
 })();

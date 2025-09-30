@@ -8,10 +8,10 @@
     />
     <title>Eventure BKK</title>
 
-    <!-- ถ้ามีไฟล์ style.css ของตัวเอง ให้ปลดบรรทัดด้านล่างและเอา <style> ออกได้ -->
+    <!-- ถ้ามี style.css ของคุณเอง ปลดคอมเมนต์บรรทัดล่าง แล้วลบ <style> ทิ้งได้ -->
     <!-- <link rel="stylesheet" href="./style.css?v=1" media="all" /> -->
 
-    <!-- Minimal CSS ใส่ไว้ให้เห็น UI ทันที (ปลอดภัยกว่าถ้ายังไม่ได้วางไฟล์ CSS) -->
+    <!-- Minimal CSS ให้เห็น UI ทันที -->
     <style>
       :root { --bg:#F4E9D7; --fg:#533629; --muted:#666; --brand:#D97D55; --border:#eee; }
       *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--fg);
@@ -48,8 +48,9 @@
       .btn{border:1px solid #eee;background:#fff;border-radius:10px;padding:10px 14px}
       .btn.primary{background:#a6d6d6;border-color:#a6d6d6}
       .muted{color:#666}
-      /* ให้บัตรใน Recommend กว้างกำลังดี */
+      .status{padding:8px 12px;color:#666;font-size:13px}
       .hlist .card{min-width:220px;flex:0 0 auto}
+      .empty{padding:24px 12px;color:#666}
     </style>
 
     <!-- LIFF SDK (ต้องมาก่อน index.js) -->
@@ -95,11 +96,7 @@
       <section id="eventGrid" class="grid"></section>
     </main>
 
-    <!-- Bottom tab -->
-    <nav class="tabbar">
-      <button class="tab active" data-target="home">🏠</button>
-      <button class="tab" data-target="events">📍</button>
-    </nav>
+    <p id="status" class="status"></p>
 
     <!-- Event Detail Sheet -->
     <div id="detailSheet" class="sheet">
