@@ -165,7 +165,7 @@
               "type": "button",
               "style": "link",
               "height": "sm",
-              "action": { "type": "uri", "label": "share", "uri": "https://line.me/" },
+              "action": { "type": "uri", "label": "share", "uri": "https://liff.line.me/2008172947-YN7apd90?share=evt_bkk_001" },
               "color": "#FFB1B1"
             },
             { "type": "box", "layout": "vertical", "contents": [], "margin": "sm" }

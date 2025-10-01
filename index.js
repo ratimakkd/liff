@@ -67,9 +67,9 @@ function toBubble(ev) {
       flex: 0,
       contents: [
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
-          action: { type: 'uri', label: 'Get tickets', uri: ev.url || 'https://line.me/' } },
+          action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
         { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
-          action: { type: 'uri', label: 'Share', uri: ev.url || 'https://line.me/' } },
+          action: { type: 'uri', label: 'Share', uri: ev.url } },
       ],
     },
   };
