@@ -68,8 +68,8 @@ function toBubble(ev) {
       contents: [
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
-        { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
-          action: { type: 'uri', label: 'Share', uri: ev.url } },
+        // { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
+        //   action: { type: 'uri', label: 'Share', uri: ev.url } },
       ],
     },
   };
