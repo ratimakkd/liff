@@ -6,6 +6,7 @@
     "contents": [
       {
         "type": "bubble",
+        "id": "evt_20250926_art-island",
         "hero": {
           "type": "image",
           "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1105182663%2F714081845133%2F1%2Foriginal.20250826-085146?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C60%2C1920%2C960&s=2f6f5c783b0623f94e3b1d4ae63625ac",
@@ -81,7 +82,7 @@
               "type": "button",
               "style": "link",
               "height": "sm",
-              "action": { "type": "uri", "label": "share", "uri": "https://line.me/" },
+              "action": { "type": "uri", "label": "share", "uri": "https://miniapp.line.me/2008172947-YN7apd90?share=evt_20250926_art-island" },
               "color": "#F79B72"
             },
             { "type": "box", "layout": "vertical", "contents": [], "margin": "sm" }
@@ -90,6 +91,7 @@
       },
       {
         "type": "bubble",
+        "id": "evt_20251005_pawty-day",
         "hero": {
           "type": "image",
           "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1100466453%2F714081845133%2F1%2Foriginal.20250820-103412?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ea13474579b376ee5341447ef4bd813e",
