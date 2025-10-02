@@ -12,8 +12,7 @@
           "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1105182663%2F714081845133%2F1%2Foriginal.20250826-085146?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C60%2C1920%2C960&s=2f6f5c783b0623f94e3b1d4ae63625ac",
           "size": "full",
           "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": { "type": "uri" }
+          "aspectMode": "cover"
         },
         "body": {
           "type": "box",
