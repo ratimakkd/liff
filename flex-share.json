@@ -13,7 +13,7 @@
           "size": "full",
           "aspectRatio": "20:13",
           "aspectMode": "cover",
-          "action": { "type": "uri", "uri": "https://www.eventbrite.com/e/art-island-festival-tickets-1630031721759?aff=ebdssbcitybrowse&keep_tld=1" }
+          "action": { "type": "uri" }
         },
         "body": {
           "type": "box",
