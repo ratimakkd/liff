@@ -56,10 +56,10 @@ a{color:inherit;text-decoration:none}
   position:sticky;top:0;z-index:20;
   display:flex;justify-content:space-between;align-items:center;
   padding:12px max(16px, env(safe-area-inset-left)) 12px max(16px, env(safe-area-inset-right));
-  background:var(--surface); color:var(--text);
+  background:#926547; color:var(--text);
   border-bottom:1px solid var(--stroke);
 }
-.brand{font-weight:900;font-size:var(--fs-lg)}
+.brand{font-weight:900;font-size:var(--fs-lg); color:#ffffff;}
 .icon-btn{
   border:0;background:#fff;color:var(--text);
   border-radius:999px;padding:10px 12px; box-shadow:0 2px 8px rgba(0,0,0,.06);
@@ -69,7 +69,7 @@ a{color:inherit;text-decoration:none}
 .hero{
   margin:12px;padding:24px 18px;border-radius:var(--r-lg);
   background:var(--primary-strong);
-  color:var(--on-primary);
+  color:#845d43;
   border:1px solid color-mix(in oklab, var(--primary) 45%, #fff);
   box-shadow:var(--shadow-card);
 }
@@ -162,4 +162,19 @@ a{color:inherit;text-decoration:none}
 /* ---------- 13) REDUCE MOTION ---------- */
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important;animation:none !important}
+}
+
+/* === text-only color override (dark brown) === */
+:root { --text-brown: #784f34; }  /* ปรับค่านี้ได้ */
+
+.quick .chip,
+.quick .chip:hover,
+.quick .chip.chip--active {
+  color: var(--text-brown) !important;   /* Home / Events */
+}
+
+#dShare.btn,
+#dShare.btn:hover,
+#dShare.btn:active {
+  color: var(--text-brown) !important;   /* ปุ่ม Share ในแอป (เฉพาะตัวอักษร) */
 }
