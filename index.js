@@ -1,4 +1,3 @@
-/* ===== Eventure BKK – App Script ===== */
 const LIFF_ID = '2008172947-YN7apd90';
 
 const $ = (id) => document.getElementById(id);
@@ -23,13 +22,6 @@ const goEvents   = $('goEvents');
 const isLineUA = /Line/i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent);
 const setStatus = (t) => { if (statusEl) statusEl.textContent = t || ''; };
 
-/* ==== Theme helper (optional public API) ==== */
-export function setTheme(name){
-  document.documentElement.setAttribute('data-theme', name);
-  try { localStorage.setItem('theme', name); } catch {}
-}
-
-/* ===== Utils ===== */
 function fmtDate(dtStr) {
   try { return new Date(dtStr).toLocaleString('en-TH', { dateStyle: 'medium', timeStyle: 'short' }); }
   catch { return dtStr || '-'; }
@@ -62,7 +54,7 @@ function toBubble(ev) {
       spacing: 'md',
       contents: [
         { type: 'text', text: ev.title || 'Untitled', weight: 'bold', size: 'lg', wrap: true },
-        { type: 'text', text: ev.tagline || '', size: 'sm', color: '#0E1B1B99', wrap: true, margin: 'md' },
+        { type: 'text', text: ev.tagline || '', size: 'sm', color: '#A6D6D6', wrap: true, margin: 'md' },
         infoRow('Place', ev.venue || '-'),
         infoRow('Date & Time', fmtDate(ev.datetime)),
         infoRow('Price', ev.price || '-'),
@@ -74,9 +66,9 @@ function toBubble(ev) {
       spacing: 'sm',
       flex: 0,
       contents: [
-        { type: 'button', style: 'primary', height: 'md',
+        { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
-        { type: 'button', style: 'link', height: 'sm',
+        { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
           action: { type: 'uri', label: 'Share', uri: ev.url } },
       ],
     },
@@ -185,12 +177,7 @@ function findFooterUrl(bubble) {
 
 const card = (ev) => `
   <article class="card open-detail" data-id="${ev.id}">
-    <div class="thumb">
-      <img src="${ev.image}" alt="">
-      <!-- Optional badge:
-      <span class="badge">Beach</span>
-      -->
-    </div>
+    <div class="thumb"><img src="${ev.image}" alt=""></div>
     <div class="meta">
       <div class="title">${ev.title}</div>
       <div class="sub">${fmtDate(ev.datetime)} · ${ev.venue}</div>
@@ -225,8 +212,7 @@ sheet.addEventListener('click', (e) => { if (e.target === sheet) closeDetail(); 
 dShare.addEventListener('click', async () => {
   if (!currentEvent) return;
   if (!window.liff || !liff.isApiAvailable?.('shareTargetPicker')) {
-    alert('Please open inside the LINE app to share.');
-    return;
+    alert('Please open inside the LINE app to share.'); return;
   }
   try {
     await liff.shareTargetPicker([toFlex(currentEvent)]);
