@@ -10,7 +10,7 @@
   --on-primary: #FFFFFF;  /* สีตัวอักษรบนพื้น --primary (#FFF แนะนำสำหรับคอนทราสต์) */
 
   /* Neutral */
-  --bg:#F9F5FA;
+  --bg:#f8fbe2;
   --surface:#FFFFFF;
   --text:#1C1A29;
   --muted:#1C1A2980;
@@ -104,7 +104,9 @@ a{color:inherit;text-decoration:none}
 /* ---------- 9) CARD (คงโครงเดิม) ---------- */
 .card{
   border-radius:28px;padding:10px;border:1px solid var(--stroke);
-  background:var(--surface);box-shadow:var(--shadow-card);
+  /* ลดความเข้มเหลือ 40% ของสีหลัก → ดูอ่อนลง */
+background: color-mix(in oklab, var(--primary) 40%, white);
+box-shadow:var(--shadow-card);
   transition:box-shadow .18s ease;
 }
 .card:hover{box-shadow:var(--shadow-lift)}
@@ -113,13 +115,8 @@ a{color:inherit;text-decoration:none}
 }
 .card .thumb img{width:100%;height:100%;object-fit:cover}
 .card .meta{background:var(--surface);border-radius:0 0 22px 22px;padding:12px 14px}
-.title{font-weight:900;font-size:var(--fs-md);line-height:1.25}
+.title{font-weight:900;font-size:var(--fs-md);line-height:1.25;color: #744f37;}
 .sub{color:var(--muted);font-size:var(--fs-sm);margin-top:6px}
-
-/* ตัวเลือกพื้นการ์ด flat tint (คง class เดิม) */
-.card--peach{background:var(--primary-medium)}
-.card--blue {background:var(--primary-strong)}
-.card--lilac{background:var(--primary-weak)}
 
 /* ---------- 10) DETAIL SHEET ---------- */
 .sheet{
