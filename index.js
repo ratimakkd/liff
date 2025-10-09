@@ -1,5 +1,8 @@
 const LIFF_ID = '2008172947-YN7apd90';
 
+const MINIAPP_ICON = new URL('./img/miniapp-icon.png', document.baseURI).href;
+
+
 /* ===== Deep link config (Mini App/LIFF) ===== */
 const USE_MINIAPP_DEEPLINK = true; // ⬅️ ถ้าใช้ LIFF อย่างเดียวให้เปลี่ยนเป็น false
 const MINIAPP_URL = `https://miniapp.line.me/${LIFF_ID}`;
@@ -55,7 +58,14 @@ function infoRow(label, value) {
 }
 
 const APP_NAME   = 'Eventure BKK';
-const MINIAPP_TOP = `https://miniapp.line.me/${LIFF_ID}`;
+const MINIAPP_TOP  = `https://miniapp.line.me/${LIFF_ID}`;
+function shareRelayLink(ev){
+  const u = new URL(MINIAPP_TOP);
+  u.searchParams.set('relayShare','1');
+  u.searchParams.set('shareId', ev.id || '');
+  return u.toString();
+}
+
 
 function toBubble(ev) {
   return {
@@ -89,8 +99,8 @@ function toBubble(ev) {
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
 
-        { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
-          action: { type: 'uri', label: 'Share', uri: `https://miniapp.line.me/${LIFF_ID}?share=${encodeURIComponent(ev.id || '')}` } },
+          { type:'button', style:'link', height:'sm', color:'#F79B72',
+          action:{ type:'uri', label:'Share', uri: shareRelayLink(ev) } },
 
         { type: 'separator', color: '#f0f0f0', margin: 'md' },
 
@@ -105,7 +115,7 @@ function toBubble(ev) {
           contents: [
             {
               type: 'image',
-              url: './img/miniapp-icon.png',
+              url: MINIAPP_ICON, 
               flex: 1,
               gravity: 'center',
               size: 'xs',
