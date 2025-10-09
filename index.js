@@ -131,12 +131,6 @@ function toBubble(ev) {
 
 const toFlex = (ev) => ({ type: 'flex', altText: ev.title || 'Bangkok event', contents: toBubble(ev) });
 
-/* ---------- Loader: flex-share.json ---------- */
-/** รองรับ 2 รูปแบบ:
- * 1) { "events": [ {id,title,datetime,venue,image,url,price,tagline}, ... ] }
- * 2) Flex object: { type:"flex", contents:{ type:"bubble" | "carousel", ... } }
- *    จะ extract บับเบิลเป็น event อัตโนมัติ
- */
 async function loadEvents() {
   const url = new URL('flex-share.json', document.baseURI).href + `?v=${Date.now()}`;
   setStatus('Loading events…');
@@ -147,11 +141,9 @@ async function loadEvents() {
 
   const events = normalizeToEvents(data);
   if (!events.length) throw new Error('No events found in flex-share.json');
-  // เติม id ถ้าไม่มี
   return events.map((e, i) => ({ id: e.id || `evt_${i}`, ...e }));
 }
 
-/* แปลง flex -> events (ดึง title/image/venue/datetime/price/tagline เท่าที่หาได้) */
 function normalizeToEvents(data) {
   if (Array.isArray(data?.events)) return data.events;
 
@@ -275,7 +267,6 @@ dShare.addEventListener('click', async () => {
   }
 });
 
-/* ---------- เปิดการ์ด → รายละเอียด ---------- */
 document.body.addEventListener('click', (e) => {
   const el = e.target.closest('.open-detail'); if (!el) return;
   const id = el.dataset.id;
@@ -283,7 +274,6 @@ document.body.addEventListener('click', (e) => {
   if (ev) openDetail(ev);
 });
 
-/* ---------- Nav / Close ---------- */
 function goto(name) {
   const views = { home: $('view-home'), events: $('view-events') };
   Object.values(views).forEach(v => v.classList.remove('active'));
@@ -333,12 +323,10 @@ btnClose?.addEventListener('click', () => {
         try {
           await liff.shareTargetPicker([toFlex(ev)]);
         } catch (err) {
-          // ผู้ใช้กดยกเลิก → เงียบไว้
         } finally {
           try { liff.closeWindow?.(); } catch {}
         }
       } else if (ev) {
-        // เผื่อเปิดนอก LINE / API ใช้ไม่ได้ → เปิดรายละเอียดแทน
         openDetail(ev);
       }
     }
