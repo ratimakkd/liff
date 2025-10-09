@@ -89,7 +89,6 @@ function toBubble(ev) {
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
 
-        // (คุณใช้ deep link แชร์ต่อก็ได้ตามที่คุยกันก่อนหน้า)
         { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
           action: { type: 'uri', label: 'Share', uri: `https://miniapp.line.me/${LIFF_ID}?share=${encodeURIComponent(ev.id || '')}` } },
 
@@ -106,7 +105,7 @@ function toBubble(ev) {
           contents: [
             {
               type: 'image',
-              url: 'https://example.com/line-mini-app-icon.png', // ← เปลี่ยนเป็นไอคอนจริงของคุณ
+              url: './img/miniapp-icon.png',
               flex: 1,
               gravity: 'center',
               size: 'xs',
