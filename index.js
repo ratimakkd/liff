@@ -48,8 +48,6 @@ function shareRelayLink(ev){
   return u.toString();
 }
 
-
-
 function toBubble(ev) {
   return {
     type: 'bubble',
@@ -87,7 +85,6 @@ function toBubble(ev) {
 
         { type: 'separator', color: '#f0f0f0', margin: 'md' },
 
-        // LINE MINI App footer (F)
         {
           type: 'box',
           layout: 'horizontal',
@@ -147,7 +144,6 @@ async function loadEvents() {
 function normalizeToEvents(data) {
   if (Array.isArray(data?.events)) return data.events;
 
-  // ถ้าเป็น flex object
   if (data?.type === 'flex' && data?.contents) {
     const c = data.contents;
     if (c.type === 'bubble') return [bubbleToEvent(c)];
@@ -156,7 +152,6 @@ function normalizeToEvents(data) {
     }
   }
 
-  // ถ้าเป็น array ของ event อยู่แล้ว
   if (Array.isArray(data)) return data;
 
   return [];
@@ -166,7 +161,7 @@ function bubbleToEvent(b) {
   const image = b?.hero?.url || '';
   const url   = b?.hero?.action?.uri || findFooterUrl(b) || '';
   const { title, tagline } = extractTitleTagline(b?.body);
-  const meta = extractMeta(b?.body); // { place, datetime, price }
+  const meta = extractMeta(b?.body);
 
   return {
     title: title || 'Untitled',
@@ -238,7 +233,6 @@ function renderEventsList(events) {
   grid.innerHTML = events.map(card).join('') || '<div class="empty">No events.</div>';
 }
 
-/* ---------- Detail sheet + Share ---------- */
 let currentEvent = null;
 function openDetail(ev) {
   currentEvent = ev;
@@ -290,9 +284,7 @@ btnClose?.addEventListener('click', () => {
   else window.close?.();
 });
 
-/* ---------- Boot ---------- */
 (async function boot() {
-  // เปิดใช้ share ใน LINE (ไม่บังคับให้ login ถ้าเป็น Mini App)
   try {
     if (isLineUA || /miniapp\.line\.me/.test(document.referrer)) {
       await liff.init({ liffId: LIFF_ID });
@@ -309,14 +301,13 @@ btnClose?.addEventListener('click', () => {
     renderEventsList(events);
     setStatus('');
 
-    /* --- Relay share: เปิดจากปุ่ม Share ในแชท → แชร์ต่ออัตโนมัติ --- */
     const qs = new URLSearchParams(location.search);
     const wantRelay = qs.get('relayShare') === '1';
     const shareId = qs.get('shareId');
     const guardKey = `relay:${shareId || 'none'}`;
 
     if (wantRelay && shareId && !sessionStorage.getItem(guardKey)) {
-      sessionStorage.setItem(guardKey, '1'); // กันลูป
+      sessionStorage.setItem(guardKey, '1');
       const ev = events.find(x => x.id === shareId);
 
       if (ev && window.liff && liff.isApiAvailable?.('shareTargetPicker')) {

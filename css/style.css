@@ -1,13 +1,8 @@
-/* =========================================================
-   Eventure BKK – Minimal Flat UI (Clean Refactor)
-   👉 Dev ปรับสีหลักตรงนี้ตัวเดียว: --primary (และ --on-primary ถ้าจำเป็น)
-   ========================================================= */
 
-/* ---------- 1) TOKENS (EDIT HERE) ---------- */
 :root{
   /* Brand */
-  --primary:    #75C0D1;  /* สีหลัก */
-  --on-primary: #FFFFFF;  /* สีตัวอักษรบนพื้น --primary (#FFF แนะนำสำหรับคอนทราสต์) */
+  --primary:    #75C0D1;
+  --on-primary: #FFFFFF; 
 
   /* Neutral */
   --bg:#f8fbe2;
@@ -20,10 +15,10 @@
   --shadow-card:0 10px 22px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);
   --shadow-lift:0 12px 24px rgba(0,0,0,.10);
 
-  /* Tint strength (ปรับ % ให้เข้มหรืออ่อนลงได้) */
-  --tint-weak:   30%;  /* อ่อน */
-  --tint-medium: 42%;  /* กลาง */
-  --tint-strong: 56%;  /* เข้ม */
+  /* Tint strength */
+  --tint-weak:   30%;  
+  --tint-medium: 42%; 
+  --tint-strong: 56%; 
 
   /* Sizes & Typography */
   --r-lg:30px; --r-md:20px; --r-sm:14px;
@@ -31,7 +26,6 @@
   --fs-xs:12px; --fs-sm:13.5px; --fs-md:15.5px; --fs-lg:20px; --fs-xl:28px;
 }
 
-/* ---------- 2) DERIVED (DO NOT EDIT) ---------- */
 :root{
   --primary-weak:   color-mix(in oklab, var(--primary) var(--tint-weak),   #fff);
   --primary-medium: color-mix(in oklab, var(--primary) var(--tint-medium), #fff);
@@ -40,7 +34,6 @@
   --shadow-primary: 0 10px 18px color-mix(in oklab, var(--primary) 28%, transparent);
 }
 
-/* ---------- 3) BASE ---------- */
 *{box-sizing:border-box}
 html,body{
   margin:0;background:var(--bg);color:var(--text);
@@ -51,7 +44,6 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--ring);border-radius:12px}
 
-/* ---------- 4) APP BAR ---------- */
 .appbar{
   position:sticky;top:0;z-index:20;
   display:flex;justify-content:space-between;align-items:center;
@@ -65,7 +57,6 @@ a{color:inherit;text-decoration:none}
   border-radius:999px;padding:10px 12px; box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
-/* ---------- 5) HERO (flat, เข้มกำลังดี) ---------- */
 .hero{
   margin:12px;padding:24px 18px;border-radius:var(--r-lg);
   background:var(--primary-strong);
@@ -86,12 +77,10 @@ a{color:inherit;text-decoration:none}
 .chip--active{background:var(--primary-medium);border-color:var(--primary-strong)}
 .chip:hover{background:var(--primary-weak)}
 
-/* ---------- 7) SECTION HEADER ---------- */
 .section-head{display:flex;justify-content:space-between;align-items:center;padding:0 14px;margin-top:6px}
 .section-head h2{margin:0;font-size:var(--fs-lg)}
 .more{color:var(--muted)}
 
-/* ---------- 8) LISTS & GRID ---------- */
 .hlist{display:flex;gap:14px;overflow-x:auto;padding:12px}
 .hlist::-webkit-scrollbar{display:none}
 .hlist .card{min-width:82vw;max-width:480px}
@@ -101,10 +90,8 @@ a{color:inherit;text-decoration:none}
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 }
 
-/* ---------- 9) CARD (คงโครงเดิม) ---------- */
 .card{
   border-radius:28px;padding:10px;border:1px solid var(--stroke);
-  /* ลดความเข้มเหลือ 40% ของสีหลัก → ดูอ่อนลง */
 background: color-mix(in oklab, var(--primary) 40%, white);
 box-shadow:var(--shadow-card);
   transition:box-shadow .18s ease;
@@ -118,7 +105,6 @@ box-shadow:var(--shadow-card);
 .title{font-weight:900;font-size:var(--fs-md);line-height:1.25;color: #744f37;}
 .sub{color:var(--muted);font-size:var(--fs-sm);margin-top:6px}
 
-/* ---------- 10) DETAIL SHEET ---------- */
 .sheet{
   position:fixed;inset:0;opacity:0;visibility:hidden;background:#0008;z-index:30;
   transition:opacity .28s ease, visibility 0s linear .28s
@@ -139,7 +125,6 @@ box-shadow:var(--shadow-card);
 .kv li{display:flex;gap:10px;margin:8px 0}
 .kv b{min-width:110px;color:var(--text);font-size:var(--fs-sm)}
 
-/* ---------- 11) BUTTONS ---------- */
 .btnrow{display:flex;gap:10px;margin-top:12px}
 .btn{
   border:0;border-radius:999px;padding:12px 18px;font-weight:900;font-size:var(--fs-sm);
@@ -152,26 +137,24 @@ box-shadow:var(--shadow-card);
   background:#fff;border:1px solid var(--stroke);color:var(--text)
 }
 
-/* ---------- 12) VIEWS ---------- */
 .view{display:none}
 .view.active{display:block}
 
-/* ---------- 13) REDUCE MOTION ---------- */
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important;animation:none !important}
 }
 
-/* === text-only color override (dark brown) === */
-:root { --text-brown: #784f34; }  /* ปรับค่านี้ได้ */
+
+:root { --text-brown: #784f34; } 
 
 .quick .chip,
 .quick .chip:hover,
 .quick .chip.chip--active {
-  color: var(--text-brown) !important;   /* Home / Events */
+  color: var(--text-brown) !important;   
 }
 
 #dShare.btn,
 #dShare.btn:hover,
 #dShare.btn:active {
-  color: var(--text-brown) !important;   /* ปุ่ม Share ในแอป (เฉพาะตัวอักษร) */
+  color: var(--text-brown) !important;  
 }
