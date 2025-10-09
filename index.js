@@ -54,6 +54,9 @@ function infoRow(label, value) {
   };
 }
 
+const APP_NAME   = 'Eventure BKK';
+const MINIAPP_TOP = `https://miniapp.line.me/${LIFF_ID}`;
+
 function toBubble(ev) {
   return {
     type: 'bubble',
@@ -86,13 +89,54 @@ function toBubble(ev) {
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
 
-        // ปุ่ม Share ในการ์ด (แชท) → เปิดกลับเข้าแอปในโหมด relay เพื่อแชร์ต่อ
+        // (คุณใช้ deep link แชร์ต่อก็ได้ตามที่คุยกันก่อนหน้า)
         { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
-          action: { type: 'uri', label: 'Share', uri: shareRelayLink(ev) } },
+          action: { type: 'uri', label: 'Share', uri: `https://miniapp.line.me/${LIFF_ID}?share=${encodeURIComponent(ev.id || '')}` } },
+
+        { type: 'separator', color: '#f0f0f0', margin: 'md' },
+
+        // LINE MINI App footer (F)
+        {
+          type: 'box',
+          layout: 'horizontal',
+          spacing: 'md',
+          margin: 'md',
+          flex: 1,
+          action: { type: 'uri', label: 'Open Mini App', uri: MINIAPP_TOP },
+          contents: [
+            {
+              type: 'image',
+              url: 'https://example.com/line-mini-app-icon.png', // ← เปลี่ยนเป็นไอคอนจริงของคุณ
+              flex: 1,
+              gravity: 'center',
+              size: 'xs',
+              aspectMode: 'cover',
+              aspectRatio: '1:1',
+            },
+            {
+              type: 'text',
+              text: APP_NAME,
+              flex: 19,
+              size: 'xs',
+              color: '#999999',
+              weight: 'bold',
+              gravity: 'center',
+              wrap: false,
+            },
+            {
+              type: 'image',
+              url: 'https://vos.line-scdn.net/service-notifier/footer_go_btn.png',
+              flex: 1,
+              gravity: 'center',
+              size: 'xxs',
+            },
+          ],
+        },
       ],
     },
   };
 }
+
 const toFlex = (ev) => ({ type: 'flex', altText: ev.title || 'Bangkok event', contents: toBubble(ev) });
 
 /* ---------- Loader: flex-share.json ---------- */
