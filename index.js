@@ -1,8 +1,5 @@
 const LIFF_ID = '2008172947-YN7apd90';
 
-const MINIAPP_ICON = new URL('./img/miniapp-icon.png', document.baseURI).href;
-
-
 /* ===== Deep link config (Mini App/LIFF) ===== */
 const USE_MINIAPP_DEEPLINK = true; // ⬅️ ถ้าใช้ LIFF อย่างเดียวให้เปลี่ยนเป็น false
 const MINIAPP_URL = `https://miniapp.line.me/${LIFF_ID}`;

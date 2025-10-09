@@ -101,7 +101,7 @@
               "contents": [
                 {
                   "type": "image",
-                  "url": "MINIAPP_ICON",
+                  "url": "./img/miniapp-icon.png",
                   "flex": 1,
                   "gravity": "center",
                   "size": "xs",
@@ -229,7 +229,7 @@
               "contents": [
                 {
                   "type": "image",
-                  "url": "MINIAPP_ICON",
+                  "url": "./img/miniapp-icon.png",
                   "flex": 1,
                   "gravity": "center",
                   "size": "xs",
@@ -416,7 +416,7 @@
               "contents": [
                 {
                   "type": "image",
-                  "url": "MINIAPP_ICON",
+                  "url": "./img/miniapp-icon.png",
                   "flex": 1,
                   "gravity": "center",
                   "size": "xs",
@@ -604,7 +604,7 @@
               "contents": [
                 {
                   "type": "image",
-                  "url": "MINIAPP_ICON",
+                  "url": "./img/miniapp-icon.png",
                   "flex": 1,
                   "gravity": "center",
                   "size": "xs",
