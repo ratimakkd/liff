@@ -1,5 +1,22 @@
 const LIFF_ID = '2008172947-YN7apd90';
 
+/* ===== Deep link config (Mini App/LIFF) ===== */
+const USE_MINIAPP_DEEPLINK = true; // ⬅️ ถ้าใช้ LIFF อย่างเดียวให้เปลี่ยนเป็น false
+const MINIAPP_URL = `https://miniapp.line.me/${LIFF_ID}`;
+const LIFF_APP_URI = `line://app/${LIFF_ID}`;
+function shareRelayLink(ev) {
+  const id = ev.id || '';
+  if (USE_MINIAPP_DEEPLINK) {
+    const u = new URL(MINIAPP_URL);
+    u.searchParams.set('relayShare', '1');
+    u.searchParams.set('shareId', id);
+    return u.toString();
+  } else {
+    const qs = new URLSearchParams({ relayShare: '1', shareId: id }).toString();
+    return `${LIFF_APP_URI}?${qs}`;
+  }
+}
+
 const $ = (id) => document.getElementById(id);
 const homeReco = $('home-reco');
 const grid     = $('eventGrid');
@@ -68,8 +85,10 @@ function toBubble(ev) {
       contents: [
         { type: 'button', style: 'primary', height: 'md', color: '#A6D6D6',
           action: { type: 'uri', label: 'Get tickets', uri: ev.url } },
+
+        // ปุ่ม Share ในการ์ด (แชท) → เปิดกลับเข้าแอปในโหมด relay เพื่อแชร์ต่อ
         { type: 'button', style: 'link', height: 'sm', color: '#F79B72',
-          action: { type: 'uri', label: 'Share', uri: ev.url } },
+          action: { type: 'uri', label: 'Share', uri: shareRelayLink(ev) } },
       ],
     },
   };
@@ -184,7 +203,6 @@ const card = (ev) => `
     </div>
   </article>`;
 
-
 function renderRecommend(events) {
   homeReco.innerHTML = events.slice(0, 4).map(card).join('') || '<div class="empty">No events.</div>';
 }
@@ -264,6 +282,30 @@ btnClose?.addEventListener('click', () => {
     renderRecommend(events);
     renderEventsList(events);
     setStatus('');
+
+    /* --- Relay share: เปิดจากปุ่ม Share ในแชท → แชร์ต่ออัตโนมัติ --- */
+    const qs = new URLSearchParams(location.search);
+    const wantRelay = qs.get('relayShare') === '1';
+    const shareId = qs.get('shareId');
+    const guardKey = `relay:${shareId || 'none'}`;
+
+    if (wantRelay && shareId && !sessionStorage.getItem(guardKey)) {
+      sessionStorage.setItem(guardKey, '1'); // กันลูป
+      const ev = events.find(x => x.id === shareId);
+
+      if (ev && window.liff && liff.isApiAvailable?.('shareTargetPicker')) {
+        try {
+          await liff.shareTargetPicker([toFlex(ev)]);
+        } catch (err) {
+          // ผู้ใช้กดยกเลิก → เงียบไว้
+        } finally {
+          try { liff.closeWindow?.(); } catch {}
+        }
+      } else if (ev) {
+        // เผื่อเปิดนอก LINE / API ใช้ไม่ได้ → เปิดรายละเอียดแทน
+        openDetail(ev);
+      }
+    }
   } catch (err) {
     console.error(err);
     setStatus('Failed to load events from flex-share.json');
