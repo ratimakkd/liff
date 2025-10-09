@@ -1,25 +1,5 @@
 const LIFF_ID = '2008172947-YN7apd90';
 
-const MINIAPP_ICON = new URL('./img/miniapp-icon.png', document.baseURI).href;
-
-
-/* ===== Deep link config (Mini App/LIFF) ===== */
-const USE_MINIAPP_DEEPLINK = true; // ⬅️ ถ้าใช้ LIFF อย่างเดียวให้เปลี่ยนเป็น false
-const MINIAPP_URL = `https://miniapp.line.me/${LIFF_ID}`;
-const LIFF_APP_URI = `line://app/${LIFF_ID}`;
-function shareRelayLink(ev) {
-  const id = ev.id || '';
-  if (USE_MINIAPP_DEEPLINK) {
-    const u = new URL(MINIAPP_URL);
-    u.searchParams.set('relayShare', '1');
-    u.searchParams.set('shareId', id);
-    return u.toString();
-  } else {
-    const qs = new URLSearchParams({ relayShare: '1', shareId: id }).toString();
-    return `${LIFF_APP_URI}?${qs}`;
-  }
-}
-
 const $ = (id) => document.getElementById(id);
 const homeReco = $('home-reco');
 const grid     = $('eventGrid');
@@ -57,14 +37,17 @@ function infoRow(label, value) {
   };
 }
 
-const APP_NAME   = 'Eventure BKK';
+const APP_NAME     = 'Eventure BKK';
 const MINIAPP_TOP  = `https://miniapp.line.me/${LIFF_ID}`;
+const MINIAPP_ICON = new URL('./img/miniapp-icon.png', document.baseURI).href;
+
 function shareRelayLink(ev){
   const u = new URL(MINIAPP_TOP);
-  u.searchParams.set('relayShare','1');
+  u.searchParams.set('relayShare', '1');
   u.searchParams.set('shareId', ev.id || '');
   return u.toString();
 }
+
 
 
 function toBubble(ev) {
